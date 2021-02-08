@@ -1,5 +1,6 @@
 package com.erikriosetiawan.mystackwidget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
@@ -31,7 +32,19 @@ class ImagesBannerWidget : AppWidgetProvider() {
                 setEmptyView(R.id.stack_view, R.id.empty_view)
             }
 
-            val toastIntent = Intent(context, ImagesBannerWidget::class.java)
+            val toastIntent = Intent(context, ImagesBannerWidget::class.java).apply {
+                action = TOAST_ACTION
+                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+            }
+
+            intent.data = intent.toUri(Intent.URI_INTENT_SCHEME).toUri()
+            val toastPendingIntent = PendingIntent.getBroadcast(
+                context,
+                0,
+                toastIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+            view.setPendingIntentTemplate(R.id.stack_view, toastPendingIntent)
         }
     }
 
