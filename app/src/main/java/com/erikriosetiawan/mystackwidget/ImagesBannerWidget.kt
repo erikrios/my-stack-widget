@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
+import android.widget.Toast
 import androidx.core.net.toUri
 
 /**
@@ -65,5 +66,15 @@ class ImagesBannerWidget : AppWidgetProvider() {
 
     override fun onDisabled(context: Context) {
         // Enter relevant functionality for when the last widget is disabled
+    }
+
+    override fun onReceive(context: Context?, intent: Intent?) {
+        super.onReceive(context, intent)
+        intent?.action?.let {
+            if (it == TOAST_ACTION) {
+                val viewIndex = intent.getIntExtra(EXTRA_ITEM, 0)
+                Toast.makeText(context, "Touched view $viewIndex", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
