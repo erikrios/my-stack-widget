@@ -72,8 +72,8 @@ class ImagesBannerWidget : AppWidgetProvider() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         super.onReceive(context, intent)
-        intent?.action?.let {
-            if (it == TOAST_ACTION) {
+        if (intent?.action != null) {
+            if (intent.action == TOAST_ACTION) {
                 val viewIndex = intent.getIntExtra(EXTRA_ITEM, 0)
                 Toast.makeText(context, "Touched view $viewIndex", Toast.LENGTH_SHORT).show()
             }
