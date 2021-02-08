@@ -16,7 +16,7 @@ class ImagesBannerWidget : AppWidgetProvider() {
 
     companion object {
         private const val TOAST_ACTION = "com.erikriosetiawan.mystackwidget.TOAST_ACTION"
-        private const val EXTRA_ITEM = "com.erikriosetiawan.mystackwidget.EXTRA_ITEM"
+        const val EXTRA_ITEM = "com.erikriosetiawan.mystackwidget.EXTRA_ITEM"
 
         private fun updateAppWidget(
             context: Context,
