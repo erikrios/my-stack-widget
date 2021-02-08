@@ -28,7 +28,7 @@ class ImagesBannerWidget : AppWidgetProvider() {
                 data = this.toUri(Intent.URI_INTENT_SCHEME).toUri()
             }
 
-            val view = RemoteViews(context.packageName, R.layout.image_banner_widget).apply {
+            val views = RemoteViews(context.packageName, R.layout.image_banner_widget).apply {
                 setRemoteAdapter(R.id.stack_view, intent)
                 setEmptyView(R.id.stack_view, R.id.empty_view)
             }
@@ -45,7 +45,9 @@ class ImagesBannerWidget : AppWidgetProvider() {
                 toastIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
-            view.setPendingIntentTemplate(R.id.stack_view, toastPendingIntent)
+            views.setPendingIntentTemplate(R.id.stack_view, toastPendingIntent)
+
+            appWidgetManager.updateAppWidget(appWidgetId, views)
         }
     }
 
